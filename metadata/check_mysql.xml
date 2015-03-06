@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="mysql">
+<version>1.0</version>
+
+<longdesc lang="en">
+This program tests connections to a MySQL server
+</longdesc>
+<shortdesc lang="en">This program tests connections to a MySQL server</shortdesc>
+
+<parameters>
+
+<parameter name="hostname" unique="0" required="1">
+<longdesc lang="en">
+Host name, IP Address, or unix socket (must be an absolute path)
+</longdesc>
+<shortdesc lang="en">Host name, IP Address, or unix socket (must be an absolute path)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="port" unique="0" required="0">
+<longdesc lang="en">
+Port number (default: 3306)
+</longdesc>
+<shortdesc lang="en">Port number (default: 3306)</shortdesc>
+<content type="integer" default="3306" />
+</parameter>
+
+<parameter name="socket" unique="0" required="0">
+<longdesc lang="en">
+Use the specified socket (has no effect if -H is used)
+</longdesc>
+<shortdesc lang="en">Use the specified socket (has no effect if -H is used)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="database" unique="0" required="0">
+<longdesc lang="en">
+Check database with indicated name
+</longdesc>
+<shortdesc lang="en">Check database with indicated name</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="username" unique="0" required="0">
+<longdesc lang="en">
+Connect using the indicated username
+</longdesc>
+<shortdesc lang="en">Connect using the indicated username</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="password" unique="0" required="0">
+<longdesc lang="en">
+Use the indicated password to authenticate the connection
+IMPORTANT: THIS FORM OF AUTHENTICATION IS NOT SECURE!!!
+Your clear-text password could be visible as a process table entry
+</longdesc>
+<shortdesc lang="en">Use the indicated password to authenticate the connection</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="check-slave" unique="0" required="0">
+<longdesc lang="en">
+Check if the slave thread is running properly.
+</longdesc>
+<shortdesc lang="en">Check if the slave thread is running properly.</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="warning" unique="0" required="0">
+<longdesc lang="en">
+Exit with WARNING status if slave server is more than INTEGER seconds
+behind master
+</longdesc>
+<shortdesc lang="en">warning level</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="critical" unique="0" required="0">
+<longdesc lang="en">
+Exit with CRITICAL status if slave server is more then INTEGER seconds
+behind master
+</longdesc>
+<shortdesc lang="en">critical level</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="extra-opts" unique="0" required="0">
+<longdesc lang="en">
+Read options from an ini file. See http://nagiosplugins.org/extra-opts
+for usage and examples.
+</longdesc>
+<shortdesc lang="en">ini file with extra options</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+</parameters>
+
+<actions>
+<action name="start"   timeout="20" />
+<action name="stop"    timeout="15" />
+<action name="status"  timeout="20" />
+<action name="monitor" timeout="20" interval="60" />
+<action name="meta-data"  timeout="15" />
+</actions>
+
+</resource-agent>

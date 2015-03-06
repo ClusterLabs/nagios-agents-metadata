@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="http">
+<version>1.0</version>
+
+<longdesc lang="en">
+This plugin tests the HTTP service on the specified host. It can test
+normal (http) and secure (https) servers, follow redirects, search for
+strings and regular expressions, check connection times, and report on
+certificate expiration times.
+</longdesc>
+<shortdesc lang="en">Test the HTTP service</shortdesc>
+
+<parameters>
+
+<parameter name="hostname" unique="0" required="1">
+<longdesc lang="en">
+Host name argument for servers using host headers (virtual host)
+Append a port to include it in the header (eg: example.com:5000)
+</longdesc>
+<shortdesc lang="en">Host name</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="IP-address" unique="0" required="0">
+<longdesc lang="en">
+IP address or name (use numeric address if possible to bypass DNS lookup).
+</longdesc>
+<shortdesc lang="en">IP address or name</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="port" unique="0" required="0">
+<longdesc lang="en">
+Port number (default: 80)
+</longdesc>
+<shortdesc lang="en">Port number (default: 80)</shortdesc>
+<content type="integer" default="80" />
+</parameter>
+
+<parameter name="use-ipv4" unique="0" required="0">
+<longdesc lang="en">
+Use IPv4 connection
+</longdesc>
+<shortdesc lang="en">Use IPv4 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="use-ipv6" unique="0" required="0">
+<longdesc lang="en">
+Use IPv6 connection
+</longdesc>
+<shortdesc lang="en">Use IPv6 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="ssl" unique="0" required="0">
+<longdesc lang="en">
+Connect via SSL. Port defaults to 443. VERSION is optional, and prevents
+auto-negotiation (1 = TLSv1, 2 = SSLv2, 3 = SSLv3).
+</longdesc>
+<shortdesc lang="en">Connect via SSL.</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="sni" unique="0" required="0">
+<longdesc lang="en">
+Enable SSL/TLS hostname extension support (SNI)
+</longdesc>
+<shortdesc lang="en">Enable SSL/TLS hostname extension support (SNI)</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="certificate" unique="0" required="0">
+<longdesc lang="en">
+Minimum number of days a certificate has to be valid. Port defaults to 443
+(when this option is used the URL is not checked.)
+</longdesc>
+<shortdesc lang="en">Minimum number of days a certificate has to be valid</shortdesc>
+<content type="integer" default="" />
+</parameter>
+
+<parameter name="expect" unique="0" required="0">
+<longdesc lang="en">
+Comma-delimited list of strings, at least one of them is expected in
+the first (status) line of the server response (default: HTTP/1.)
+If specified skips all other status line logic (ex: 3xx, 4xx, 5xx processing)
+</longdesc>
+<shortdesc lang="en">list of strings of which at least one must match</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="string" unique="0" required="0">
+<longdesc lang="en">
+String to expect in the content
+</longdesc>
+<shortdesc lang="en">String to expect in the content</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="url" unique="0" required="0">
+<longdesc lang="en">
+URL to GET or POST (default: /)
+</longdesc>
+<shortdesc lang="en">URL to GET or POST (default: /)</shortdesc>
+<content type="string" default="/" />
+</parameter>
+
+<parameter name="post" unique="0" required="0">
+<longdesc lang="en">
+URL encoded http POST data
+</longdesc>
+<shortdesc lang="en">URL encoded http POST data</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="method" unique="0" required="0">
+<longdesc lang="en">
+Set HTTP method.
+</longdesc>
+<shortdesc lang="en">Set HTTP method.</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="no-body" unique="0" required="0">
+<longdesc lang="en">
+Don't wait for document body: stop reading after headers.
+(Note that this still does an HTTP GET or POST, not a HEAD.)
+</longdesc>
+<shortdesc lang="en">Don't wait for document body</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="max-age" unique="0" required="0">
+<longdesc lang="en">
+Warn if document is more than SECONDS old. the number can also be of
+the form "10m" for minutes, "10h" for hours, or "10d" for days.
+</longdesc>
+<shortdesc lang="en">maximum age of document</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="content-type" unique="0" required="0">
+<longdesc lang="en">
+specify Content-Type header media type when POSTing
+</longdesc>
+<shortdesc lang="en">specify Content-Type header media type when POSTing</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="linespan" unique="0" required="0">
+<longdesc lang="en">
+Allow regex to span newlines (must precede -r or -R)
+</longdesc>
+<shortdesc lang="en">Allow regex to span newlines (must precede -r or -R)</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="regex" unique="0" required="0">
+<longdesc lang="en">
+Search page for regex STRING
+</longdesc>
+<shortdesc lang="en">Search page for regex STRING</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="eregi" unique="0" required="0">
+<longdesc lang="en">
+Search page for case-insensitive regex STRING
+</longdesc>
+<shortdesc lang="en">Search page for case-insensitive regex STRING</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="invert-regex" unique="0" required="0">
+<longdesc lang="en">
+Return CRITICAL if found, OK if not
+</longdesc>
+<shortdesc lang="en">Return CRITICAL if found, OK if not</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="authorization" unique="0" required="0">
+<longdesc lang="en">
+Username:password on sites with basic authentication
+</longdesc>
+<shortdesc lang="en">Username:password on sites with basic authentication</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="proxy_authorization" unique="0" required="0">
+<longdesc lang="en">
+Username:password on proxy-servers with basic authentication
+</longdesc>
+<shortdesc lang="en">Username:password on proxy-servers with basic authentication</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="useragent" unique="0" required="0">
+<longdesc lang="en">
+String to be sent in http header as "User Agent"
+</longdesc>
+<shortdesc lang="en">String to be sent in http header as "User Agent"</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="header" unique="0" required="0">
+<longdesc lang="en">
+Any other tags to be sent in http header. Use multiple times for additional headers
+</longdesc>
+<shortdesc lang="en">other tags to be sent in http header</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="link" unique="0" required="0">
+<longdesc lang="en">
+Wrap output in HTML link (obsoleted by urlize)
+</longdesc>
+<shortdesc lang="en">Wrap output in HTML link (obsoleted by urlize)</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="onredirect" unique="0" required="0">
+<longdesc lang="en">
+How to handle redirected pages. sticky is like follow but stick to the
+specified IP address. stickyport also ensures port stays the same.
+</longdesc>
+<shortdesc lang="en">How to handle redirected pages</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="pagesize" unique="0" required="0">
+<longdesc lang="en">
+Minimum page size required (bytes) : Maximum page size required (bytes)
+</longdesc>
+<shortdesc lang="en">minimum[:maximum] page size</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="warning" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in warning status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in warning status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="critical" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in critical status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in critical status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="timeout" unique="0" required="0">
+<longdesc lang="en">
+Seconds before connection times out (default: 10)
+</longdesc>
+<shortdesc lang="en">Seconds before connection times out (default: 10)</shortdesc>
+<content type="integer" default="10" />
+</parameter>
+
+<parameter name="extra-opts" unique="0" required="0">
+<longdesc lang="en">
+Read options from an ini file. See http://nagiosplugins.org/extra-opts
+for usage and examples.
+</longdesc>
+<shortdesc lang="en">ini file with extra options</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+</parameters>
+
+<actions>
+<action name="start"   timeout="20" />
+<action name="stop"    timeout="15" />
+<action name="status"  timeout="20" />
+<action name="monitor" timeout="20" interval="60" />
+<action name="meta-data"  timeout="15" />
+</actions>
+
+</resource-agent>

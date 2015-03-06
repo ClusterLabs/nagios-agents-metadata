@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="tcp">
+<version>1.0</version>
+
+<longdesc lang="en">
+This plugin tests TCP connections with the specified host (or unix socket).
+</longdesc>
+<shortdesc lang="en">This plugin tests TCP connections with the specified host (or unix socket).</shortdesc>
+
+<parameters>
+
+<parameter name="hostname" unique="0" required="1">
+<longdesc lang="en">
+Host name, IP Address, or unix socket (must be an absolute path)
+</longdesc>
+<shortdesc lang="en">Host name, IP Address, or unix socket (must be an absolute path)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="port" unique="0" required="0">
+<longdesc lang="en">
+Port number (default: none)
+</longdesc>
+<shortdesc lang="en">Port number (default: none)</shortdesc>
+<content type="integer" default="none" />
+</parameter>
+
+<parameter name="use-ipv4" unique="0" required="0">
+<longdesc lang="en">
+Use IPv4 connection
+</longdesc>
+<shortdesc lang="en">Use IPv4 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="use-ipv6" unique="0" required="0">
+<longdesc lang="en">
+Use IPv6 connection
+</longdesc>
+<shortdesc lang="en">Use IPv6 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="escape" unique="0" required="0">
+<longdesc lang="en">
+Can use \n, \r, \t or \ in send or quit string. Must come before send or quit option
+Default: nothing added to send, \r\n added to end of quit
+</longdesc>
+<shortdesc lang="en">Can use \n, \r, \t or \ in send or quit string. Must come before send or quit option</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="send" unique="0" required="0">
+<longdesc lang="en">
+String to send to the server
+</longdesc>
+<shortdesc lang="en">String to send to the server</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="expect" unique="0" required="0">
+<longdesc lang="en">
+String to expect in server response (may be repeated)
+</longdesc>
+<shortdesc lang="en">String to expect in server response (may be repeated)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="all" unique="0" required="0">
+<longdesc lang="en">
+All expect strings need to occur in server response. Default is any
+</longdesc>
+<shortdesc lang="en">All expect strings need to occur in server response. Default is any</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="quit" unique="0" required="0">
+<longdesc lang="en">
+String to send server to initiate a clean close of the connection
+</longdesc>
+<shortdesc lang="en">String to send server to initiate a clean close of the connection</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="refuse" unique="0" required="0">
+<longdesc lang="en">
+Accept TCP refusals with states ok, warn, crit (default: crit)
+</longdesc>
+<shortdesc lang="en">Accept TCP refusals with states ok, warn, crit (default: crit)</shortdesc>
+<content type="string" default="crit" />
+</parameter>
+
+<parameter name="mismatch" unique="0" required="0">
+<longdesc lang="en">
+Accept expected string mismatches with states ok, warn, crit (default: warn)
+</longdesc>
+<shortdesc lang="en">Accept expected string mismatches with states ok, warn, crit (default: warn)</shortdesc>
+<content type="string" default="warn" />
+</parameter>
+
+<parameter name="jail" unique="0" required="0">
+<longdesc lang="en">
+Hide output from TCP socket
+</longdesc>
+<shortdesc lang="en">Hide output from TCP socket</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="maxbytes" unique="0" required="0">
+<longdesc lang="en">
+Close connection once more than this number of bytes are received
+</longdesc>
+<shortdesc lang="en">Close connection once more than this number of bytes are received</shortdesc>
+<content type="integer" default="" />
+</parameter>
+
+<parameter name="delay" unique="0" required="0">
+<longdesc lang="en">
+Seconds to wait between sending string and polling for response
+</longdesc>
+<shortdesc lang="en">Seconds to wait between sending string and polling for response</shortdesc>
+<content type="integer" default="" />
+</parameter>
+
+<parameter name="certificate" unique="0" required="0">
+<longdesc lang="en">
+Minimum number of days a certificate has to be valid.
+1st is #days for warning, 2nd is critical (if not specified - 0).
+</longdesc>
+<shortdesc lang="en">Minimum number of days a certificate has to be valid.</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="ssl" unique="0" required="0">
+<longdesc lang="en">
+Use SSL for the connection.
+</longdesc>
+<shortdesc lang="en">Use SSL for the connection.</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="warning" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in warning status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in warning status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="critical" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in critical status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in critical status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="timeout" unique="0" required="0">
+<longdesc lang="en">
+Seconds before connection times out (default: 10)
+</longdesc>
+<shortdesc lang="en">Seconds before connection times out (default: 10)</shortdesc>
+<content type="integer" default="10" />
+</parameter>
+
+<parameter name="extra-opts" unique="0" required="0">
+<longdesc lang="en">
+Read options from an ini file. See http://nagiosplugins.org/extra-opts
+for usage and examples.
+</longdesc>
+<shortdesc lang="en">ini file with extra options</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+</parameters>
+
+<actions>
+<action name="start"   timeout="20" />
+<action name="stop"    timeout="15" />
+<action name="status"  timeout="20" />
+<action name="monitor" timeout="20" interval="60" />
+<action name="meta-data"  timeout="15" />
+</actions>
+
+</resource-agent>

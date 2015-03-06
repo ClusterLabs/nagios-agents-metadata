@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!DOCTYPE resource-agent SYSTEM "ra-api-1.dtd">
+<resource-agent name="ldap">
+<version>1.0</version>
+
+<longdesc lang="en">
+check ldap server
+</longdesc>
+<shortdesc lang="en">check ldap server</shortdesc>
+
+<parameters>
+
+<parameter name="hostname" unique="0" required="1">
+<longdesc lang="en">
+Host name, IP Address, or unix socket (must be an absolute path)
+</longdesc>
+<shortdesc lang="en">Host name, IP Address, or unix socket (must be an absolute path)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="base" unique="0" required="1">
+<longdesc lang="en">
+ldap base (eg. ou=my unit, o=my org, c=at)
+</longdesc>
+<shortdesc lang="en">ldap base (eg. ou=my unit, o=my org, c=at)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="port" unique="0" required="0">
+<longdesc lang="en">
+Port number (default: 389)
+</longdesc>
+<shortdesc lang="en">Port number (default: 389)</shortdesc>
+<content type="integer" default="389" />
+</parameter>
+
+<parameter name="use-ipv4" unique="0" required="0">
+<longdesc lang="en">
+Use IPv4 connection
+</longdesc>
+<shortdesc lang="en">Use IPv4 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="use-ipv6" unique="0" required="0">
+<longdesc lang="en">
+Use IPv6 connection
+</longdesc>
+<shortdesc lang="en">Use IPv6 connection</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="attr" unique="0" required="0">
+<longdesc lang="en">
+ldap attribute to search (default: (objectclass=*))
+</longdesc>
+<shortdesc lang="en">ldap attribute to search (default: (objectclass=*))</shortdesc>
+<content type="string" default="(objectclass=*)" />
+</parameter>
+
+<parameter name="bind" unique="0" required="0">
+<longdesc lang="en">
+ldap bind DN (if required)
+</longdesc>
+<shortdesc lang="en">ldap bind DN (if required)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="pass" unique="0" required="0">
+<longdesc lang="en">
+ldap password (if required)
+</longdesc>
+<shortdesc lang="en">ldap password (if required)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="starttls" unique="0" required="0">
+<longdesc lang="en">
+use starttls mechanism introduced in protocol version 3
+</longdesc>
+<shortdesc lang="en">use starttls mechanism introduced in protocol version 3</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="ssl" unique="0" required="0">
+<longdesc lang="en">
+use ldaps (ldap v2 ssl method). this also sets the default port to 636
+</longdesc>
+<shortdesc lang="en">use ldaps (ldap v2 ssl method). this also sets the default port to 636</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="ver2" unique="0" required="0">
+<longdesc lang="en">
+use ldap protocol version 2
+</longdesc>
+<shortdesc lang="en">use ldap protocol version 2</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="ver3" unique="0" required="0">
+<longdesc lang="en">
+use ldap protocol version 3
+(default protocol version: 2)
+</longdesc>
+<shortdesc lang="en">use ldap protocol version 3</shortdesc>
+<content type="boolean" default="false" />
+</parameter>
+
+<parameter name="warn" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in warning status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in warning status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="crit" unique="0" required="0">
+<longdesc lang="en">
+Response time to result in critical status (seconds)
+</longdesc>
+<shortdesc lang="en">Response time to result in critical status (seconds)</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+<parameter name="timeout" unique="0" required="0">
+<longdesc lang="en">
+Seconds before connection times out (default: 10)
+</longdesc>
+<shortdesc lang="en">Seconds before connection times out (default: 10)</shortdesc>
+<content type="integer" default="10" />
+</parameter>
+
+<parameter name="extra-opts" unique="0" required="0">
+<longdesc lang="en">
+Read options from an ini file. See http://nagiosplugins.org/extra-opts
+for usage and examples.
+</longdesc>
+<shortdesc lang="en">ini file with extra options</shortdesc>
+<content type="string" default="" />
+</parameter>
+
+</parameters>
+
+<actions>
+<action name="start"   timeout="20" />
+<action name="stop"    timeout="15" />
+<action name="status"  timeout="20" />
+<action name="monitor" timeout="20" interval="60" />
+<action name="meta-data"  timeout="15" />
+</actions>
+
+</resource-agent>
