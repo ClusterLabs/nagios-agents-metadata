@@ -27,7 +27,7 @@
 
 Name:           nagios-agents-metadata
 Summary:        OCF metadata for nagios agents
-License:        LGPL-2.1+ and GPL-2.0+
+License:        GPL-2.0+ and GPL-3.0
 Group:          %{pkg_group}
 Version:        1.0
 Release:        0
